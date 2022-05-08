@@ -84,6 +84,8 @@ def show(time, episode, q_table, steps_log):
     plt.imshow(data, cmap="OrRd")
     plt.colorbar()
     plt.title("episode"+str(episode))
+    plt.xticks([])
+    plt.yticks([])
     plt.savefig(
         fname="my/picture/"+str(time)+"/"+str(episode)+".jpeg")
     plt.clf()

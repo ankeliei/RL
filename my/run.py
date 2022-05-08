@@ -12,8 +12,7 @@ TOTAL_EPISODE = map_source['config']['total_episode']
 CONVER = map_source['config']['conver']
 SHOW_STEP = map_source['config']['show_step']
 
-def update():
-    t = time.time()
+def update(t):
     steps_log = []
     same_road_count = 0
     for episode in range(TOTAL_EPISODE):
@@ -66,6 +65,8 @@ if __name__ == "__main__":
         width = env.width,
         height = env.height,
         actions=list(range(env.n_actions)))
-    
+    t = time.time()
+    QtableShow.show(t, -1, RL.q_table, [[0,0]])
+
     update()
     
