@@ -1,7 +1,10 @@
 import json
+from re import M
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from pylab import xticks, yticks
+from matplotlib import ticker
 import os
 
 map_source = {}
@@ -84,8 +87,15 @@ def show(time, episode, q_table, steps_log):
     plt.imshow(data, cmap="OrRd")
     plt.colorbar()
     plt.title("episode"+str(episode))
-    plt.xticks([])
-    plt.yticks([])
+    
+    myxlable = [str(int((x-1)/3)) for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
+    post_list_x = [x for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
+    plt.xticks(post_list_x, myxlable)
+    
+    myylable = [str(int((x-1)/3)) for x in range(0, MAZE_H*3-1) if (x-1)%3 == 0]
+    post_list_y = [x for x in range(0, MAZE_H*3-1) if (x-1)%3 == 0]
+    plt.yticks(post_list_y, myylable)
+
     plt.savefig(
         fname="my/picture/"+str(time)+"/"+str(episode)+".jpeg")
     plt.clf()
