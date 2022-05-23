@@ -38,6 +38,9 @@ class QLearningTable:
             q_target = r + self.gamma* self.q_table.loc[s_, :].max()
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)
 
+        if done:
+            return np.mean(self.q_table.values.tolist())
+
     def policy(self, env):
         observation = env.reset()
         done = False

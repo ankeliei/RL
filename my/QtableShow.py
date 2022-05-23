@@ -1,10 +1,7 @@
 import json
-from re import M
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from pylab import xticks, yticks
-from matplotlib import ticker
 import os
 
 map_source = {}
@@ -19,21 +16,22 @@ HELL_R = map_source['landform']['hell']['reward']
 DESTINATION_R = map_source['landform']['destination']['reward']
 MAP = map_source['map']
 
-def show(time, episode, q_table, steps_log):
+def show(time, episode, q_table, steps_log, show_q_table):
     try:
         os.mkdir("my/picture/"+str(time))
     except:
         pass
     data = np.zeros([MAZE_H*3, MAZE_W*3])
     data = data + LAND_R
-    for index, row in q_table.iterrows():
-        index = index[1:-1].split(", ")
-        x = int(index[0])
-        y = int(index[1])
-        data[x*3][y*3+1] = row[0]
-        data[x*3+2][y*3+1] = row[1]
-        data[x*3+1][y*3] = row[2]
-        data[x*3+1][y*3+2] = row[0]
+    if show_q_table:
+        for index, row in q_table.iterrows():
+            index = index[1:-1].split(", ")
+            x = int(index[0])
+            y = int(index[1])
+            data[x*3][y*3+1] = row[0]
+            data[x*3+2][y*3+1] = row[1]
+            data[x*3+1][y*3] = row[2]
+            data[x*3+1][y*3+2] = row[0]
 
     # plt.rc('font',family='Youyuan',size='9')
     # plt.rc('axes',unicode_minus='False')
@@ -86,7 +84,7 @@ def show(time, episode, q_table, steps_log):
 
     plt.imshow(data, cmap="OrRd")
     plt.colorbar()
-    plt.title("episode"+str(episode))
+    # plt.title("episode"+str(episode))
     
     myxlable = [str(int((x-1)/3)) for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
     post_list_x = [x for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
