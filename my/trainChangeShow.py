@@ -93,6 +93,7 @@ def show(t, steps_count_log, mean_q_log, ifsuccess_log):
     info += str(mean_q_log)
     info += "\nifsuccess_log="
     info += str(ifsuccess_log)
+    info += "\n"
 
     f = open("my/picture/"+str(t)+"/"+"info.txt", mode='w')
     f.write(info)

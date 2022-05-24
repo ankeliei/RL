@@ -45,14 +45,14 @@ def update(t):
                 # print(RL.q_table)
                 break
 
-        if steps_log_ == steps_log:
-            same_road_count += 1
-        else:
-            steps_log = steps_log_.copy()
-            same_road_count = 0
-        if same_road_count == CONVER and done:
-            print("已经"+str(CONVER)+"轮收敛稳定")
-            break
+        # if steps_log_ == steps_log:
+        #     same_road_count += 1
+        # else:
+        #     steps_log = steps_log_.copy()
+        #     same_road_count = 0
+        # if same_road_count == CONVER and done:
+        #     print("已经"+str(CONVER)+"轮收敛稳定")
+        #     break
 
         if episode % SHOW_STEP == 0:
             print("==============showing============")
@@ -64,6 +64,7 @@ def update(t):
     print("total reward:"+str(reward_sum))
     QtableShow.show(t, TOTAL_EPISODE+1, RL.q_table, steps_log_tmp, show_q_table=True)
     QtableShow.show(t, TOTAL_EPISODE+2, RL.q_table, steps_log_tmp, show_q_table=False)
+    QtableShow.show(t, TOTAL_EPISODE+3, RL.q_table, [], show_q_table=True)
     trainChangeShow.show(t, steps_count_log, mean_q_log, ifsuccess_log)
     trainChangeShow.show_q_(t, mean_q_log)  #显示Q值及其变化率
     print("game over")

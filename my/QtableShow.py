@@ -31,7 +31,7 @@ def show(time, episode, q_table, steps_log, show_q_table):
             data[x*3][y*3+1] = row[0]
             data[x*3+2][y*3+1] = row[1]
             data[x*3+1][y*3] = row[2]
-            data[x*3+1][y*3+2] = row[0]
+            data[x*3+1][y*3+2] = row[3]
 
     # plt.rc('font',family='Youyuan',size='9')
     # plt.rc('axes',unicode_minus='False')
@@ -79,19 +79,29 @@ def show(time, episode, q_table, steps_log, show_q_table):
     text += "small_blue_block : steps"
     
 
-    plt.text(-15, 15, text, size = 5)
+    # plt.text(-15, 15, text, size = 5)
 
 
     plt.imshow(data, cmap="OrRd")
     plt.colorbar()
     # plt.title("episode"+str(episode))
     
-    myxlable = [str(int((x-1)/3)) for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
-    post_list_x = [x for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
+    # myxlable = [str(int((x-1)/3)) for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
+    # post_list_x = [x for x in range(0, MAZE_W*3-1) if (x-1)%3 == 0]
+    # plt.xticks(post_list_x, myxlable)
+    
+    # myylable = [str(int((x-1)/3)) for x in range(0, MAZE_H*3-1) if (x-1)%3 == 0]
+    # post_list_y = [x for x in range(0, MAZE_H*3-1) if (x-1)%3 == 0]
+    # plt.yticks(post_list_y, myylable)
+
+
+    # 以2为间隔
+    myxlable = [str(int((x-1)/3)) for x in range(0, MAZE_W*3-1) if (x-1)%6 == 0]
+    post_list_x = [x for x in range(0, MAZE_W*3-1) if (x-1)%6 == 0]
     plt.xticks(post_list_x, myxlable)
     
-    myylable = [str(int((x-1)/3)) for x in range(0, MAZE_H*3-1) if (x-1)%3 == 0]
-    post_list_y = [x for x in range(0, MAZE_H*3-1) if (x-1)%3 == 0]
+    myylable = [str(int((x-1)/3)) for x in range(0, MAZE_H*3-1) if (x-1)%6 == 0]
+    post_list_y = [x for x in range(0, MAZE_H*3-1) if (x-1)%6 == 0]
     plt.yticks(post_list_y, myylable)
 
     plt.savefig(
